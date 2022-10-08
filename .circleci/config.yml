@@ -1,32 +1,34 @@
---- 
-jobs: 
-  build: 
-    docker: 
-      - 
-        image: "cimg/node_js:13"
-    steps: 
-      - 
-        run: 
-          command: |
-              echo "no tests"
-              docker --version
-              docker build -t udagram-api-feed ./udagram-api-feed
-              docker build -t udagram-api-user ./udagram-api-user
-              docker build -t udagram-frontend ./udagram-frontend
-              docker build -t udagram-reverseproxy ./udagram-reverseproxy
-              
-              docker tag udagram-api-feed dante9623/udagram-api-feed:v2
-              docker tag udagram-api-user dante9623/udagram-api-user:v2
-              docker tag udagram-frontend dante9623/udagram-frontend:v2
-              docker tag udagram-reverseproxy dante9623/udagram-reverseproxy:v2
-              echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-              docker push dante9623/udagram-api-feed:v2
-              docker push dante9623/udagram-api-user:v2
-              docker push dante9623/udagram-frontend:v2
-              docker push dante9623/udagram-reverseproxy:v2
-          name: "Build my app"
 version: 2.1
-workflows: 
-  build: 
-    jobs: 
+jobs:
+  build:
+    working_directory: ~/monolith-to-microservice
+    docker:
+      - image: cimg/node:13 
+        auth:
+          username: dante9623
+          password: $DOCKERHUB_PASSWORD  
+      
+    steps:
+      - checkout
+      - run:
+          name: "Build my app"
+          command: |
+          echo "no tests"
+          docker --version
+          docker build -t udagram-api-feed ./udagram-api-feed
+          docker build -t udagram-api-user ./udagram-api-user
+          docker build -t udagram-frontend ./udagram-frontend
+          docker build -t udagram-reverseproxy ./udagram-reverseproxy
+          docker tag udagram-api-feed dante9623/udagram-api-feed:v2
+          docker tag udagram-api-user dante9623/udagram-api-user:v2
+          docker tag udagram-frontend dante9623/udagram-frontend:v2
+          docker tag udagram-reverseproxy dante9623/udagram-reverseproxy:v2
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker push dante9623/udagram-api-feed:v2
+          docker push dante9623/udagram-api-user:v2
+          docker push dante9623/udagram-frontend:v2
+          docker push dante9623/udagram-reverseproxy:v2
+workflows:
+  build:
+    jobs:
       - build
