@@ -46,7 +46,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: /monolith-to-microservices/udagram-reverseproxy
-          
-        name: tag and push 
-          push: true
-          tags: user/app:latest
+          tags: | 
+            dante9623/udagram-api-feed:v2
+            dante9623/udagram-api-user:v2
+            dante9623/udagram-frontend:v2
+            dante9623/udagram-reverseproxy:v2
