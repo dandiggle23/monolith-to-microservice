@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - 'main'
-
+    workflow_dispatch:
   jobs:
   docker:
     runs-on: ubuntu-latest
@@ -27,11 +27,14 @@ on:
       -
         name: Build udagram-api-feed
         uses: docker/build-push-action@v3
-        run: docker build -t udagram-api-feed ./udagram-api-feed
+        with:
+          context: /monolith-to-microservices/udagram-api-feed
       -
         name: Build udagram-api-user
         uses: docker/build-push-action@v3
-        run: docker build -t udagram-api-user ./udagram-api-user
+        with:  
+          context: /monolith-to-microservices/udagram-api-user
+        
       -
         name: Build udagram-frontend
         uses: docker/build-push-action@v3
