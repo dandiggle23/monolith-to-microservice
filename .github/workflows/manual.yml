@@ -29,30 +29,28 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./udagram-api-feed
+          push: true
+          tags: dante9623/udagram-api-feed:latest, dante9623/udagram-api-feed:${{github.run_number}}
       -
         name: Build udagram-api-user
         uses: docker/build-push-action@v3
         with:  
           context: ./udagram-api-user
+          push: true
+          tags: dante9623/udagram-api-user:latest, dante9623/udagram-api-user:${{github.run_number}}
         
       -
         name: Build udagram-frontend
         uses: docker/build-push-action@v3
         with:
           context: ./udagram-frontend
+          push: true
+          tags: dante9623/udagram-frontend:latest, dante9623/udagram-frontend:${{github.run_number}}
         
       - 
         name: Build udagram-reverseproxy
         uses: docker/build-push-action@v3
         with:
           context: ./udagram-reverseproxy
-          tags: | 
-            dante9623/udagram-api-feed:v2
-            dante9623/udagram-api-user:v2
-            dante9623/udagram-frontend:v2
-            dante9623/udagram-reverseproxy:v2
-          push: |
-            dante9623/udagram-api-feed:v2
-            dante9623/udagram-api-user:v2
-            dante9623/udagram-frontend:v2
-            dante9623/udagram-reverseproxy:v2
+          tags: dante9623/udagram-reverseproxy:latest, dante9623/udagram-reverseproxy:${{github.run_number}}
+            
