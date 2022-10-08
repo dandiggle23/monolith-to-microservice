@@ -28,24 +28,24 @@ jobs:
         name: Build udagram-api-feed
         uses: docker/build-push-action@v3
         with:
-          context: /monolith-to-microservices/udagram-api-feed
+          context: ./monolith-to-microservices/udagram-api-feed
       -
         name: Build udagram-api-user
         uses: docker/build-push-action@v3
         with:  
-          context: /monolith-to-microservices/udagram-api-user
+          context: ./monolith-to-microservices/udagram-api-user
         
       -
         name: Build udagram-frontend
         uses: docker/build-push-action@v3
         with:
-          context:  /monolith-to-microservices/udagram-frontend
+          context:  ./monolith-to-microservices/udagram-frontend
         
       - 
         name: Build udagram-reverseproxy
         uses: docker/build-push-action@v3
         with:
-          context: /monolith-to-microservices/udagram-reverseproxy
+          context: ./monolith-to-microservices/udagram-reverseproxy
           tags: | 
             dante9623/udagram-api-feed:v2
             dante9623/udagram-api-user:v2
