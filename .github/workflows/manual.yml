@@ -38,11 +38,15 @@ jobs:
       -
         name: Build udagram-frontend
         uses: docker/build-push-action@v3
-        run: docker build -t udagram-frontend ./udagram-frontend
+        with:
+          context:  /monolith-to-microservices/udagram-frontend
+        
       - 
         name: Build udagram-reverseproxy
         uses: docker/build-push-action@v3
-        run: docker build -t udagram-reverseproxy ./udagram-reverseproxy
+        with:
+          context: /monolith-to-microservices/udagram-reverseproxy
+
         with:
           context: .
           push: true
