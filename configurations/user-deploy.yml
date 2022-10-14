@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-user
+  labels:
+    app: backend-user
+spec:
+  selector:
+    matchLabels:
+      app: backend-user
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: backend-user
+    spec:
+      containers:
+      - name: backend-user
+        image: dante9623/udagram-api-user:v2
+        envFrom:
+          - secretRef:
+              name: udagramdb-env
+          - configMapRef:
+              name: udagram-env
+        ports:
+        - containerPort: 8080
+        

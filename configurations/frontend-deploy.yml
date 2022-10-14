@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-frontend
+  labels:
+    app: udagram-frontend
+spec:
+  selector:
+    matchLabels:
+      app: udagram-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: udagram-frontend
+    spec:
+      containers:
+      - name: udagram-frontend
+        image: dante9623/udagram-frontend:v3
+        ports:
+        - containerPort: 8080
+       
